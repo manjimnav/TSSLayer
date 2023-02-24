@@ -1,0 +1,3 @@
+dense:
+  keep_dims: False
+  type: tensorflow

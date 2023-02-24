@@ -1,0 +1,26 @@
+NoSelection:
+Linear:
+  thresholds: 
+    - 0.5
+    - 1.0
+    - step: 0.05
+Correlation:
+  thresholds: 
+    - 0.5
+    - 1.0
+    - step: 0.05
+MutualInformation:
+  thresholds: 
+    - 0.5
+    - 1.0
+    - step: 0.05
+SelectionLayer:
+  regularization: 
+    - 0.00001
+    - 0.0001
+    - 0.001
+TimeSelectionLayer:
+  regularization: 
+    - 0.00001
+    - 0.0001
+    - 0.001

@@ -1,0 +1,97 @@
+Electricity:
+  seq_len:
+    - 4
+    - 24
+    - step: 4
+  pred_len:
+    - 1
+  select_timesteps:
+    - True
+
+ETTh1:
+  seq_len:
+    - 12
+    - 72
+    - step: 12
+  pred_len:
+    - 1
+  select_timesteps:
+    - True
+    - False
+
+ETTh2:
+  seq_len:
+    - 12
+    - 72
+    - step: 12
+  pred_len:
+    - 1
+  select_timesteps:
+    - True
+    - False
+
+ExchangeRate:
+  seq_len:
+    - 3
+    - 7
+    - 15
+    - 30
+  pred_len:
+    - 1
+  select_timesteps:
+    - True
+
+TorneoCO:
+  seq_len:
+    - 12
+    - 72
+    - step: 12
+  pred_len:
+    - 1
+  select_timesteps:
+    - True
+    - False
+
+TorneoNO2:
+  seq_len:
+    - 12
+    - 72
+    - step: 12
+  pred_len:
+    - 1
+  select_timesteps:
+    - True
+    - False
+
+TorneoO3:
+  seq_len:
+    - 12
+    - 72
+    - step: 12
+  pred_len:
+    - 1
+  select_timesteps:
+    - True
+    - False
+
+TorneoPM10:
+  seq_len:
+    - 12
+    - 72
+    - step: 12
+  pred_len:
+    - 1
+  select_timesteps:
+    - True
+    - False
+
+Traffic:
+  seq_len:
+    - 3
+    - 6
+    - 9
+    - 12
+  pred_len:
+    - 1
+  select_timesteps:
+    - True
