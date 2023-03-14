@@ -4,7 +4,7 @@ Traditional time series forecasting models often use all available variables, in
 This article presents a deep learning-based method for time series forecasting that incorporates feature selection to improve model efficacy and interpretability. The proposed method uses a multidimensional layer to remove irrelevant features along the temporal dimension. The resulting model is compared to a baseline model that uses all available features, and experimental results demonstrate that the proposed approach can improve forecasting accuracy while reducing model complexity. Additionally, the selected features provide insights into the underlying patterns and drivers of the time series, aiding in the interpretation of the forecasting results.
 Overall, the proposed method offers a simple and effective solution for time series forecasting with feature selection using deep learning techniques. This method can be used as a general-purpose approach for various applications and can potentially improve the accuracy and interpretability of time series forecasting models.
 
-This repository includes all the code used for the development of this work. The data is available at the following link:
+This repository includes all the code used for the development of this work. The data is available at the following link: https://drive.google.com/drive/folders/1ScEPS1DEPBdF97-82HddB2wTy5j2iOcD?usp=sharing.
 
 In order to use the repository, data must be stored in the `data/processed` folder and the results of the execution are stored in a csv in the `results` folder.
 
