@@ -17,7 +17,7 @@ def correlation_selection(features, labels, total_sum=0.9):
         correlation = np.corrcoef(features[:, f_idx], labels.squeeze())[0, 1]
         correlations.append(correlation)
     
-    return get_features_scores_sum(np.array(correlations), total_sum=total_sum)
+    return get_features_scores_sum(np.abs(np.array(correlations)), total_sum=total_sum)
 
 def get_selected_indexes(selection_method, features, labels, original_indexes, parameters):
 
@@ -31,39 +31,39 @@ def get_selected_indexes(selection_method, features, labels, original_indexes, p
         thr = parameters['selection'].get('params', dict()).get('threshold', None)
         selector = SelectPercentile(f_regression, percentile=10)
         selector.fit(features, labels)
-        scores = selector.scores_
+        scores = np.abs(selector.scores_)
         indexes = get_features_scores_sum(scores, total_sum=thr)
         selected_indexes = indexes
     elif 'MutualInformation' in selection_method:
         thr = parameters['selection'].get('params', dict()).get('threshold', None)
         selector = SelectPercentile(mutual_info_regression, percentile=10)
         selector.fit(features, labels)
-        scores = selector.scores_
+        scores = np.abs(selector.scores_)
         indexes = get_features_scores_sum(scores, total_sum=thr)
         selected_indexes = indexes
     elif 'Correlation' in selection_method:
         thr = parameters['selection'].get('params', dict()).get('threshold', None)
-        print(parameters['selection'])
         mask = correlation_selection(features, labels, total_sum=thr)
         
         selected_indexes = selected_indexes[mask]
     
     return selected_indexes
 
-def select_features(data, parameters):
+def select_features(data, parameters, labels_idxs):
     seq_len = parameters['dataset']['params']['seq_len']
-    pred_len = parameters['dataset']['params']['seq_len']
+    pred_len = parameters['dataset']['params']['pred_len']
     shift = parameters['dataset']['params']['shift']
     select_timesteps = parameters['dataset']['params']['select_timesteps']
     selection_method = parameters['selection']['name']
 
     original_indexes = np.arange(data.shape[1]*seq_len)
     
-
     data_windowed = window_stack(data, stepsize=shift, width=seq_len+pred_len)
 
-    features = data_windowed[:, :seq_len]
-    labels = data_windowed[:, seq_len:]
+    features = data_windowed[:, :data.shape[1]*seq_len]
+    labels = data_windowed[:, data.shape[1]*seq_len:]
+
+    labels = labels.reshape(-1, pred_len, data.shape[1])[:, :, labels_idxs].reshape(-1, pred_len*len(labels_idxs))
 
     selected_indexes = set()
     for index in range(labels.shape[1]):
@@ -81,9 +81,6 @@ def select_features(data, parameters):
         selection_mask[selected_indexes] = 1
 
         features_selected_mask = selection_mask.reshape(seq_len, -1).sum(axis=0)>(seq_len//2)
-        print(selection_mask.reshape(seq_len, -1).sum(axis=0))
-        print(features_selected_mask)
         
         selected_indexes = np.arange(data.shape[1])[features_selected_mask]
-        return selected_indexes
-        
+        return selected_indexes        

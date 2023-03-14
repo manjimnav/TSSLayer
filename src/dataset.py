@@ -11,7 +11,7 @@ def collate_pair(x, pred_len, values_idxs, label_idxs, selection_idxs=None, sele
     feat_size = len(label_idxs)+ len(values_idxs)
 
     if select_timesteps:
-        selected_inputs = tf.squeeze(tf.gather(tf.reshape(inputs, [seq_len*feat_size]), selection_idxs))
+        selected_inputs = tf.gather(tf.reshape(inputs, [seq_len*feat_size]), selection_idxs)
     else:
         selected_inputs = tf.squeeze(tf.gather(inputs, selection_idxs, axis=1))
     

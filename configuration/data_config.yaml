@@ -34,8 +34,6 @@ ExchangeRate:
   seq_len:
     - 3
     - 7
-    - 15
-    - 30
   pred_len:
     - 1
   select_timesteps:

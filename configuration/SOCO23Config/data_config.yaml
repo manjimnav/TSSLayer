@@ -55,7 +55,7 @@ Electricity:
   select_timesteps:
     - True
   shift:
-    - 4
+    - 96
 
 ETTh1:
   seq_len:
@@ -101,5 +101,5 @@ Traffic:
   select_timesteps:
     - True
   shift:
-    - 3
+    - 24
     

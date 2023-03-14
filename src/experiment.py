@@ -51,7 +51,7 @@ class ExperimentInstance:
             raise Exception(f"Cannot select features in dataset {self.parameters['dataset']['name']}")
             
         train_scaled, valid_scaled, test_scaled, self.scaler = split_and_scale(self.data)
-        self.selected_idxs = select_features(train_scaled, self.parameters)
+        self.selected_idxs = select_features(train_scaled, self.parameters, self.label_idxs)
 
         data_train, data_valid, data_test = windowing(train_scaled, valid_scaled, test_scaled, self.values_idxs, self.label_idxs, self.selected_idxs, self.parameters)
  
